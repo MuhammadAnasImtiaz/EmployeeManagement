@@ -29,7 +29,7 @@ namespace EmployeeManagement
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc();
 
             app.UseRouting();
 

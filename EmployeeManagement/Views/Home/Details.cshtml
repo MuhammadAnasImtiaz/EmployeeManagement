@@ -1,13 +1,41 @@
-﻿@model EmployeeManagement.Models.Employee
+﻿@model EmployeeManagement.ViewModels.Home.HomeDetailViewModel
 
-    <html>
-    <head>
-        <title></title>
-    </head>
-    <body>
-        <h3>@ViewBag.PageTitle</h3>
-        <h3>@Model.Name</h3>
-        <h3>@Model.Email</h3>
-        <h3>@Model.Department</h3>
-    </body>
-    </html>
+@*@{ 
+    Layout = "/Views/Shared/_Layout.cshtml";
+}*@
+
+<h3>@Model.PageTitle</h3>
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <h3>@Model.Employee.Name</h3>
+            </div>
+            <div class="card-body text-center">
+                <img class="card-img-top" src="#" alt="Alternate Text" />
+            </div>
+
+
+            <div>
+                <h3>@Model.Employee.Email</h3>
+            </div>
+
+            <div>
+                <h3>@Model.Employee.Department</h3>
+            </div>
+            <div class="card-footer text-center">
+                <a href="#" class="btn btn-primary">Back</a>
+                <a href="#" class="btn btn-primary">Edit</a>
+                <a href="#" class="btn btn-primary">Delete</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{ 
+    <script src="~/js/CustomScript.js"></script>
+}
+
+
+
+

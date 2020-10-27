@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Identity;
 
 namespace EmployeeManagement
 {
@@ -26,6 +27,15 @@ namespace EmployeeManagement
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequiredLength = 4;
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireDigit = false;
+            });
             //services.AddDbContextPool<AppDbContext>(options=>options.Use)
             services.AddMvc(options => options.EnableEndpointRouting = false);
             //services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
@@ -44,7 +54,12 @@ namespace EmployeeManagement
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseStatusCodePagesWithRedirects("/Error/{0}");
+            }
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
